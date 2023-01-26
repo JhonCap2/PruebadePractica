@@ -13,6 +13,7 @@ namespace PruebadePractica.Core.Entities
         {
                 InformacionPersonas = new HashSet<InformacionPersona>();
         }
+        [Key]
         public int IdPerson { get; set; }
         public string Names { get; set; }
         public string LastName { get; set; }

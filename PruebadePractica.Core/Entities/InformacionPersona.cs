@@ -10,6 +10,7 @@ namespace PruebadePractica.Core.Entities
 {
     public partial class InformacionPersona
     {
+        [Key]
         public int IdInformacionPersona { get; set; }
         public int IdPerson { get; set; }
         public int PhoneNumber { get; set; }

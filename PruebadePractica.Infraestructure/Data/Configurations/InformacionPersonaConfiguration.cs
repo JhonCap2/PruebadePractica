@@ -20,7 +20,7 @@ namespace PruebadePractica.Infraestructure.Data.Configurations
                 .HasColumnName("IdInformacionPersona");
 
             builder.Property(e => e.IdPerson)
-                .HasColumnName("IdPerson");
+                .HasColumnName("IdPersonId");
 
             builder.Property(e => e.PhoneNumber)
                 .HasColumnName("PhoneNumber")
