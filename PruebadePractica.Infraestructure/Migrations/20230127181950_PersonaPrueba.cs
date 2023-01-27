@@ -20,7 +20,7 @@ namespace PruebadePractica.Infraestructure.Migrations
                     NamesPerson = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
                     LastNamesPerson = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
                     DateofBirth = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Identity = table.Column<int>(type: "int", nullable: false)
+                    Identity = table.Column<int>(type: "int", maxLength: 11, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,26 +31,27 @@ namespace PruebadePractica.Infraestructure.Migrations
                 name: "InformacionPersona",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", unicode: false, maxLength: 500, nullable: false),
-                    IdPerson = table.Column<int>(type: "int", unicode: false, nullable: false),
+                    IdInformacionPersona = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdPersonId = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Work = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InformacionPersona", x => x.id);
+                    table.PrimaryKey("PK_InformacionPersona", x => x.IdInformacionPersona);
                     table.ForeignKey(
-                        name: "Fk_Persona_Id",
-                        column: x => x.IdPerson,
+                        name: "Fk_Persona_Id_Person",
+                        column: x => x.IdPersonId,
                         principalTable: "Persona",
                         principalColumn: "IdPerson");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_InformacionPersona_IdPerson",
+                name: "IX_InformacionPersona_IdPersonId",
                 table: "InformacionPersona",
-                column: "IdPerson");
+                column: "IdPersonId");
         }
 
         /// <inheritdoc />

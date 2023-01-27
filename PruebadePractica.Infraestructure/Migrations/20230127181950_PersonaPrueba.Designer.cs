@@ -12,8 +12,8 @@ using PruebadePractica.Infraestructure.Data;
 namespace PruebadePractica.Infraestructure.Migrations
 {
     [DbContext(typeof(PersonaContext))]
-    [Migration("20230126190812_Person3")]
-    partial class Person3
+    [Migration("20230127181950_PersonaPrueba")]
+    partial class PersonaPrueba
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,20 +28,20 @@ namespace PruebadePractica.Infraestructure.Migrations
             modelBuilder.Entity("PruebadePractica.Core.Entities.InformacionPersona", b =>
                 {
                     b.Property<int>("IdInformacionPersona")
-                        .HasMaxLength(500)
-                        .IsUnicode(false)
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("IdInformacionPersona");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdInformacionPersona"));
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("email");
+                        .HasColumnName("Email");
 
-                    b.Property<int>("PersonaId")
-                        .IsUnicode(false)
+                    b.Property<int>("IdPerson")
                         .HasColumnType("int")
-                        .HasColumnName("IdPerson");
+                        .HasColumnName("IdPersonId");
 
                     b.Property<int>("PhoneNumber")
                         .HasMaxLength(200)
@@ -56,7 +56,7 @@ namespace PruebadePractica.Infraestructure.Migrations
 
                     b.HasKey("IdInformacionPersona");
 
-                    b.HasIndex("PersonaId");
+                    b.HasIndex("IdPerson");
 
                     b.ToTable("InformacionPersona", (string)null);
                 });
@@ -75,6 +75,7 @@ namespace PruebadePractica.Infraestructure.Migrations
                         .HasColumnName("DateofBirth");
 
                     b.Property<int>("Identification")
+                        .HasMaxLength(11)
                         .HasColumnType("int")
                         .HasColumnName("Identity");
 
@@ -100,9 +101,9 @@ namespace PruebadePractica.Infraestructure.Migrations
                 {
                     b.HasOne("PruebadePractica.Core.Entities.Persona", "Persona")
                         .WithMany("InformacionPersonas")
-                        .HasForeignKey("PersonaId")
+                        .HasForeignKey("IdPerson")
                         .IsRequired()
-                        .HasConstraintName("Fk_Persona_Id");
+                        .HasConstraintName("Fk_Persona_Id_Person");
 
                     b.Navigation("Persona");
                 });
